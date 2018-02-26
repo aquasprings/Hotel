@@ -1,0 +1,52 @@
+use db01test01
+
+create table booking_detail_1(name varchar(20), age int,contactnumber bigint ,emailid varchar(20),addresss varchar(20),roomcategory varchar(20),noofdays int ,rentalamount int, bid int identity(1,1) );
+
+create proc booking__details5
+@name varchar(20), 
+@age int,
+@contactnumber bigint,
+@emailid varchar(20),
+@addresss varchar(20),
+@roomcategory varchar(20),
+@noofdays int,
+@rentalamount int,
+@boid1 int out
+as 
+begin
+insert into booking_detail_1 values(@name,@age,@contactnumber,@emailid,@addresss,@roomcategory,@noofdays,@rentalamount)
+set @boid1 = @@IDENTITY;
+end
+
+
+create proc view__details_1
+as 
+begin
+select * from  booking_detail_1
+end
+
+create proc 
+delete_details1
+@id int
+as
+begin
+
+delete from booking_detail_1 where bid=@id;
+end
+
+
+create proc Update_details1
+@name varchar(20), 
+@age int,
+@contactnumber bigint,
+@emailid varchar(20),
+@addresss varchar(20),
+@roomcategory varchar(20),
+@noofdays int,
+@rentalamount int,
+@id int 
+as
+begin
+update booking_detail_1 SET name=@name,age=@age,contactnumber=@contactnumber,emailid=@emailid,addresss=@addresss,
+roomcategory=@roomcategory,noofdays=@noofdays,rentalamount=@rentalamount where bid=@id;
+end
